@@ -9,9 +9,16 @@ export default function handler(
   req: NextApiRequest,
   res: NextApiResponse<Data>
 ) {
-  res.setHeader(
-    "Set-Cookie",
-    `csrf_token=cccssssrrrrfffffffff; SameSite=Lax; Secure; HttpOnly; Path=/;`
-  );
+  const body = req.body;
+  const cookies = [
+    `csrf_token=cccssssrrrrfffffffff; SameSite=Lax; Secure; HttpOnly; Path=/;`,
+  ];
+  if (req.method === "POST" && body.set_cookie_name && body.set_cookie_value) {
+    console.log("set-cookie", body.set_cookie_name, body.set_cookie_value);
+    cookies.push(
+      `${body.set_cookie_name}=${body.set_cookie_value}; SameSite=Lax; Secure; HttpOnly; Path=/;`
+    );
+  }
+  res.setHeader("Set-Cookie", cookies);
   res.status(200).json({ name: "John Doe" });
 }
