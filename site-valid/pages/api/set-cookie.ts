@@ -13,6 +13,9 @@ export default function handler(
   const cookies = [
     `csrf_token=cccssssrrrrfffffffff; SameSite=Lax; Secure; HttpOnly; Path=/;`,
   ];
+  console.log(req.headers);
+  console.log(req.body.set_cookie_name);
+  console.log(req.body.set_cookie_value);
   if (req.method === "POST" && body.set_cookie_name && body.set_cookie_value) {
     console.log("set-cookie", body.set_cookie_name, body.set_cookie_value);
     cookies.push(

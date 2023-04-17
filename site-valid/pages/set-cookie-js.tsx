@@ -1,12 +1,12 @@
 export default function Page() {
   const onClick = () => {
     // Build formData object.
-    let formData = new FormData();
-    formData.append("name", "John");
-    formData.append("password", "John123");
     fetch("http://localhost:3999/api/set-cookie", {
       method: "POST",
-      body: formData,
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+      },
+      body: "set_cookie_name=John&set_cookie_value=John123",
     });
   };
 
